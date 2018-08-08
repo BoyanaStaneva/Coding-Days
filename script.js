@@ -30,19 +30,15 @@ function showUser(xmlhttp) {
     var json = xmlhttp.responseText;
     // creates object with user details
     var user = JSON.parse(json);
-    console.log(user)
 
-    // select the element
-    var nodeForProfile = document.querySelector(".information")
-    // creates the text note
-    var textNodeForProfile = document.createTextNode(user.login + " is github user " + user.id)
-    // appends the text node
-    nodeForProfile.appendChild(textNodeForProfile)
+    // select the element, adds the information to the selected HTML element
+    document.querySelector(".information").innerHTML = user.login + " is github user " + user.id;
 
+
+    //rewrite this with inner HTML
     var nodeForLink = document.createElement('a');
     nodeForLink.innerHTML = 'This is the user profile';
     nodeForLink.setAttribute('title', 'Google');
-    nodeForLink.setAttribute('href', user.avatar_url);
     document.querySelector(".avatar").appendChild(nodeForLink);
 
   } else {
@@ -52,6 +48,7 @@ function showUser(xmlhttp) {
     // creates the text note
     var textNodeForProfile = document.createTextNode("This user doesn't exist")
     // appends the text node
+    // rewrite this with innerHTML
     nodeForProfile.appendChild(textNodeForProfile)
   }
 }
