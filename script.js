@@ -1,16 +1,15 @@
 // github user finder example
 
-$(document).ready(function() {
-  $(document).on('keypress', '#username', function(event) {
-    if (event.which === 13) { // check the key was <enter>
-      var input = $(this);
-      var username = input.val();
-      // creates a variable to hold the data passed by the function, which gets the username from the server response
-      var serverResponse  = getGithubInfo(username);
-      //Console logs the object created in the ShowUser function
-    }
-  });
-});
+document.getElementById('searchIcon').onclick = function() {
+    let getUsername = document.getElementById('username').value
+    getGithubInfo(getUsername);
+}
+
+document.onkeypress = function(){
+if (event.which === 13) {
+  let getUsername = document.getElementById('username').value
+  getGithubInfo(getUsername);
+}};
 
 function getGithubInfo(username) {
   var url = 'https://api.github.com/users/' + username;
@@ -30,25 +29,26 @@ function showUser(xmlhttp) {
     var json = xmlhttp.responseText;
     // creates object with user details
     var user = JSON.parse(json);
+    console.log(user)
+
 
     // select the element, adds the information to the selected HTML element
     document.querySelector(".information").innerHTML = user.login + " is github user " + user.id;
 
+    //create a new variable to select the p with a class of link
 
-    //rewrite this with inner HTML
-    var nodeForLink = document.createElement('a');
-    nodeForLink.innerHTML = 'This is the user profile';
-    nodeForLink.setAttribute('title', 'Google');
-    document.querySelector(".avatar").appendChild(nodeForLink);
+    var profileLink = document.querySelector(".link");
+    profileLink.innerHTML = `This is a link to their <a href=${user.html_url}>profile </a>`
+
+    var profilePicture = document.querySelector(".picture");
+    profilePicture.innerHTML = `<img src=${user.avatar_url}>`
+
+
 
   } else {
     if(xmlhttp.status !== 200)
     // select the element
-    var nodeForProfile = document.querySelector(".information")
-    // creates the text note
-    var textNodeForProfile = document.createTextNode("This user doesn't exist")
-    // appends the text node
-    // rewrite this with innerHTML
-    nodeForProfile.appendChild(textNodeForProfile)
+  document.querySelector(".information").innerHTML = "This user doesn't exist"
+
   }
 }

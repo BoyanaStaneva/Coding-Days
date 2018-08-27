@@ -379,7 +379,35 @@ hr {
   border-width: 0;
   border-top: 1px solid #E1E1E1; }
 
+  /* Images
 
+  ----------------------- */
+
+.picture img {
+  max-width: 300px;
+  width: 100%;
+  border-radius: 50%;
+  }
+
+
+
+/* Custom css
+
+---------------------- */
+
+#searchIcon {
+  display: inline-block;
+  cursor: pointer;
+  margin-left:20px;}
+
+#searchIcon:hover {
+
+color:hotpink;}
+
+.gitLogo img {
+  max-width:600px;
+  width:100%;
+}
 /* Clearing
 –––––––––––––––––––––––––––––––––––––––––––––––––– */
 
