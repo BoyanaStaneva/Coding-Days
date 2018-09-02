@@ -1,5 +1,14 @@
 // github user finder example
 
+var createDate = new Date();
+/*var curr_date = createDate.getDate();
+var curr_month = createDate.getMonth() + 1; //Months are zero based
+var curr_year = createDate.getFullYear();
+var today = (curr_year + "-" + curr_month + "-" + curr_date); */
+console.log(createDate);
+
+
+
 document.getElementById('searchIcon').onclick = function() {
     let getUsername = document.getElementById('username').value
     getGithubInfo(getUsername);
@@ -31,24 +40,23 @@ function showUser(xmlhttp) {
     var user = JSON.parse(json);
     console.log(user)
 
+    var signUpDate = new Date(user.created_at);
+    console.log(signUpDate);
 
-    // select the element, adds the information to the selected HTML element
-    document.querySelector(".information").innerHTML = user.login + " is github user " + user.id;
+    let difference = 0;
+    let days = 1000 * 60 * 60 *24;
 
-    //create a new variable to select the p with a class of link
+    difference = createDate - signUpDate;
+    document.querySelector(".days").innerHTML =
 
-    var profileLink = document.querySelector(".link");
-    profileLink.innerHTML = `This is a link to their <a href=${user.html_url}>profile </a>`
-
-    var profilePicture = document.querySelector(".picture");
-    profilePicture.innerHTML = `<img src=${user.avatar_url}>`
+    user.login + " has been coding for " + Math.floor(difference / days) + " days. " + "That is " + Math.floor(Math.floor(difference / days) / 365) + " years";
 
 
 
   } else {
     if(xmlhttp.status !== 200)
     // select the element
-  document.querySelector(".information").innerHTML = "This user doesn't exist"
+  document.querySelector(".days").innerHTML = "This user doesn't exist"
 
   }
 }
